@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU⁺ · Estrutura Organizacional</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.org-wrap { display:flex; flex-direction:column; gap:0; }
+.org-level { border:1px solid var(--border2); border-radius:3px; background:var(--bg2); margin-bottom:12px; overflow:hidden; transition:border-color 0.3s; display:grid; grid-template-columns:180px 1fr; }
+.org-level:hover { border-color:rgba(196,151,74,0.25); }
+.org-badge { background:var(--bg3); border-right:1px solid var(--border2); padding:24px 20px; display:flex; flex-direction:column; justify-content:center; gap:5px; transition:background 0.2s; }
+.org-level:hover .org-badge { background:var(--bg4); }
+.org-badge-n { font-family:'Cormorant Garamond',serif; font-size:2.8rem; font-weight:300; font-style:italic; color:rgba(196,151,74,0.18); line-height:1; }
+.org-badge-tag { font-size:0.6rem; font-weight:500; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); }
+.org-body { padding:24px 28px; }
+.org-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:600; color:var(--text); margin-bottom:8px; }
+.org-purpose { font-size:0.84rem; font-weight:300; color:var(--muted); line-height:1.72; margin-bottom:18px; }
+.org-roles { border-top:1px solid var(--border2); padding-top:16px; display:flex; flex-direction:column; gap:0; }
+.org-role { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid var(--border2); }
+.org-role:last-child { border-bottom:none; padding-bottom:0; }
+.org-role-dot { width:6px; height:6px; border-radius:50%; border:1px solid var(--gold); background:transparent; flex-shrink:0; margin-top:7px; transition:background 0.2s; }
+.org-level:hover .org-role-dot { background:var(--gold); }
+.org-role-name { font-size:0.84rem; font-weight:500; color:var(--text); margin-bottom:2px; }
+.org-role-desc { font-size:0.79rem; font-weight:300; color:var(--muted); line-height:1.6; }
+.conn { width:1px; height:20px; background:linear-gradient(to bottom,rgba(196,151,74,0.3),transparent); margin:0 auto 12px; }
+@media(max-width:900px){ .org-level{grid-template-columns:1fr;} .org-badge{border-right:none;border-bottom:1px solid var(--border2);flex-direction:row;align-items:center;gap:14px;padding:14px 18px;} }
+</style>
+</head>
+<body>
+<nav class="topnav" id="topnav"></nav>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow reveal">Grupo EU⁺</p>
+      <h1 class="reveal rd1">Estrutura Organizacional</h1>
+      <p class="reveal rd2">Como o Grupo EU<sup class="plus">+</sup> se organiza para cumprir seu propósito. Pessoas enxergam nomes. Sistemas enxergam códigos.</p>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="container">
+
+      <div class="org-level reveal">
+        <div class="org-badge"><span class="org-badge-n">P</span><span class="org-badge-tag">Presidência</span></div>
+        <div class="org-body">
+          <div class="org-title">Presidência</div>
+          <p class="org-purpose">Guardiã última do propósito institucional. Autoridade final sobre validação, arbitragem normativa, aprovação estrutural e poder de veto cultural.</p>
+          <div class="org-roles">
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Bruno Vieira</div><div class="org-role-desc">Presidente · Fundador · Guardião do propósito e do patrimônio intelectual do Grupo EU<sup class="plus">+</sup>.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conn"></div>
+
+      <div class="org-level reveal rd1">
+        <div class="org-badge"><span class="org-badge-n">B</span><span class="org-badge-tag">Board</span></div>
+        <div class="org-body">
+          <div class="org-title">Board Estratégico</div>
+          <p class="org-purpose">Núcleo de diretoria responsável por operar a visão de longo prazo. Composto por mentores humanos e agentes que traduzem o propósito em direção estratégica executável.</p>
+          <div class="org-roles">
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">CEO Mentor</div><div class="org-role-desc">Coordenação geral do Board e alinhamento com a Presidência.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Conselho Estratégico</div><div class="org-role-desc">Deliberação sobre iniciativas de alto impacto e decisões estruturais do ecossistema.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Secretaria Estratégica do Board</div><div class="org-role-desc">Registro, síntese e encaminhamento das deliberações estratégicas.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Auditoria de Conflitos e Redundâncias</div><div class="org-role-desc">Identificação e resolução de sobreposições entre iniciativas, documentos e agentes.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conn"></div>
+
+      <div class="org-level reveal rd2">
+        <div class="org-badge"><span class="org-badge-n">D</span><span class="org-badge-tag">Diretorias</span></div>
+        <div class="org-body">
+          <div class="org-title">Diretorias</div>
+          <p class="org-purpose">Responsáveis pela execução das frentes institucionais e alinhamento entre estratégia e operação. Cada diretoria opera uma dimensão crítica do ecossistema com autonomia de método e responsabilidade de resultado.</p>
+          <div class="org-roles">
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Diretoria de Automação Estratégica</div><div class="org-role-desc">Arquitetura e evolução dos sistemas de inteligência e automação do ecossistema.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Mentoria Executiva</div><div class="org-role-desc">Desenvolvimento de capacidade executiva nas frentes ativas do Grupo EU<sup class="plus">+</sup>.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Conselho de Capital e Patrimônio</div><div class="org-role-desc">Custódia e valorização dos ativos intelectuais e patrimoniais do ecossistema.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Conselho de Propriedade Intelectual</div><div class="org-role-desc">Registro, proteção e rastreabilidade das metodologias e frameworks proprietários.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Conselho de Identidade e Legado</div><div class="org-role-desc">Preservação da coerência conceitual e da linguagem institucional em todas as expressões do ecossistema.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conn"></div>
+
+      <div class="org-level reveal rd3">
+        <div class="org-badge"><span class="org-badge-n">G</span><span class="org-badge-tag">Gerências</span></div>
+        <div class="org-body">
+          <div class="org-title">Gerências</div>
+          <p class="org-purpose">Supervisão direta dos fluxos de realização e alinhamento operacional entre as frentes. Traduzem diretrizes estratégicas em entregas concretas e mensuráveis.</p>
+          <div class="org-roles">
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">PMO Executivo</div><div class="org-role-desc">Gestão e priorização de projetos ativos, controle de prazos e alinhamento de recursos.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Inventário de Projetos</div><div class="org-role-desc">Registro e rastreabilidade de todas as iniciativas em andamento, planejadas e arquivadas.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Priorização Estratégica</div><div class="org-role-desc">Análise e ordenação de iniciativas conforme impacto, alinhamento ao propósito e capacidade de execução.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">CIO Operacional</div><div class="org-role-desc">Supervisão dos sistemas de informação e fluxos de dados entre as frentes do ecossistema.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="conn"></div>
+
+      <div class="org-level reveal rd4">
+        <div class="org-badge"><span class="org-badge-n">O</span><span class="org-badge-tag">Operação</span></div>
+        <div class="org-body">
+          <div class="org-title">Operação</div>
+          <p class="org-purpose">Realização técnica e manutenção dos ativos documentados. Onde o conhecimento é produzido, registrado e entregue. Os agentes operacionais funcionam de forma livre, orientados ao resultado e à preservação do conhecimento.</p>
+          <div class="org-roles">
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Analista de Arquitetura</div><div class="org-role-desc">Análise e evolução da arquitetura de informação e estruturas documentais do ecossistema.</div></div></div>
+            <div class="org-role"><div class="org-role-dot"></div><div><div class="org-role-name">Arquiteto de Infraestrutura</div><div class="org-role-desc">Desenho e manutenção da infraestrutura técnica que suporta o ecossistema digital EU<sup class="plus">+</sup>.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="container">
+      <div class="card reveal" style="text-align:center;padding:44px 40px">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,2.5vw,1.7rem);font-weight:300;font-style:italic;color:var(--text);line-height:1.5;margin-bottom:14px">"Os agentes não existem para seguir roteiros engessados.<br>Os agentes existem para produzir conhecimento, análise,<br>evolução e construção de patrimônio intelectual."</p>
+        <span style="font-size:0.68rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold)">Filosofia V2 · Grupo EU⁺</span>
+      </div>
+    </div>
+  </section>
+</div>
+<footer id="site-footer"></footer>
+<script src="../js/shared.js"></script>
+<script>buildNav('organizacao'); buildFooter();</script>
+</body>
+</html>
