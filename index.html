@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="EU⁺ — Portal Institucional. Comunidade viva de preservação humana e aceleração de iniciativas.">
+<title>EU⁺ · Portal Institucional</title>
+<link rel="stylesheet" href="./css/style.css">
+<style>
+  .home-hero {
+    min-height: calc(100vh - 64px);
+    display: flex; align-items: center;
+    padding: 80px 0;
+    position: relative; overflow: hidden;
+  }
+
+  .home-hero::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px; height: 700px;
+    background: radial-gradient(ellipse, rgba(196,151,74,0.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .home-hero::after {
+    content: '';
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(196,151,74,0.2), transparent);
+  }
+
+  .hero-center {
+    text-align: center;
+    max-width: 780px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .hero-emblem { margin-bottom: 36px; }
+
+  .hero-eyebrow-home {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 18px;
+    display: block;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 11vw, 8rem);
+    font-weight: 600; color: var(--text);
+    line-height: 1; margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.55rem);
+    font-weight: 300; font-style: italic;
+    color: var(--gold); margin-bottom: 28px;
+    letter-spacing: 0.03em;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem; font-weight: 300;
+    color: var(--muted); line-height: 1.8;
+    max-width: 520px; margin: 0 auto 44px;
+  }
+
+  .hero-ctas {
+    display: flex; justify-content: center;
+    gap: 14px; flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 500;
+    padding: 13px 30px; border-radius: 2px;
+    text-decoration: none; display: inline-block;
+    transition: all 0.2s; letter-spacing: 0.02em;
+  }
+
+  .btn-primary { background: var(--gold); color: var(--bg); }
+  .btn-primary:hover { background: #D4AA62; transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid rgba(238,240,242,0.18); }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* CAMADAS */
+  .camadas-wrap {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+  }
+
+  .camada {
+    background: var(--bg2); padding: 36px 24px;
+    position: relative; overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .camada:first-child { border-radius: 3px 0 0 3px; }
+  .camada:last-child  { border-radius: 0 3px 3px 0; }
+  .camada:hover { background: var(--bg3); }
+
+  .camada::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0; transition: opacity 0.3s;
+  }
+
+  .camada:hover::before { opacity: 1; }
+
+  .camada-n {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.8rem; font-weight: 300; font-style: italic;
+    color: rgba(196,151,74,0.1); line-height: 1;
+    margin-bottom: 20px; display: block;
+  }
+
+  .camada-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .camada-title { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+  .camada-desc { font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.72; }
+
+  /* NAV CARDS */
+  .nav-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+  .nav-card {
+    border: 1px solid var(--border2); border-radius: 3px;
+    padding: 24px 20px; background: var(--bg2);
+    text-decoration: none; display: block;
+    transition: border-color 0.25s, transform 0.2s;
+    position: relative; overflow: hidden;
+  }
+
+  .nav-card::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; width: 0; height: 1px;
+    background: var(--gold); transition: width 0.3s;
+  }
+
+  .nav-card:hover { border-color: rgba(196,151,74,0.3); transform: translateY(-2px); }
+  .nav-card:hover::after { width: 100%; }
+
+  .nav-card-icon {
+    width: 36px; height: 36px;
+    border: 1px solid var(--border); border-radius: 2px;
+    background: var(--bg3); display: flex;
+    align-items: center; justify-content: center;
+    margin-bottom: 16px; color: var(--gold);
+  }
+
+  .nav-card-label { font-size: 0.58rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+  .nav-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+  .nav-card p { font-size: 0.8rem; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+  .principle-box {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 3px; padding: 48px;
+    text-align: center; position: relative; overflow: hidden;
+  }
+
+  .principle-box::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+
+  .principle-box blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: 300; font-style: italic;
+    color: var(--text); line-height: 1.4; margin-bottom: 18px;
+  }
+
+  .principle-box cite {
+    font-size: 0.7rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  @media (max-width: 900px) {
+    .camadas-wrap { grid-template-columns: 1fr 1fr; }
+    .camada:first-child { border-radius: 3px 0 0 0; }
+    .camada:last-child  { border-radius: 0 0 3px 0; }
+    .nav-cards { grid-template-columns: 1fr; }
+    .principle-box { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+<nav class="topnav" id="topnav"></nav>
+
+<div class="page-wrap">
+
+  <!-- HERO -->
+  <section class="home-hero">
+    <div class="container">
+      <div class="hero-center">
+        <div class="hero-emblem reveal">
+          <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="34" cy="34" r="32.5" stroke="rgba(196,151,74,0.18)" stroke-width="1"/>
+            <circle cx="34" cy="34" r="24.5" stroke="rgba(196,151,74,0.35)" stroke-width="1"/>
+            <circle cx="34" cy="34" r="16" stroke="rgba(196,151,74,0.2)" stroke-width="1"/>
+            <line x1="34" y1="22" x2="34" y2="46" stroke="#C4974A" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="22" y1="34" x2="46" y2="34" stroke="#C4974A" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="34" cy="34" r="3" fill="#C4974A" opacity="0.45"/>
+          </svg>
+        </div>
+        <span class="hero-eyebrow-home reveal rd1">Portal Institucional</span>
+        <h1 class="hero-title reveal rd2">EU<sup class="plus">+</sup></h1>
+        <p class="hero-sub reveal rd2">Autonomia integral. Patrimônio permanente.</p>
+        <p class="hero-desc reveal rd3">Comunidade viva de preservação humana e aceleração de iniciativas. Reunimos pessoas, projetos e inteligências comprometidas com a construção de resultados que permanecem.</p>
+        <div class="hero-ctas reveal rd4">
+          <a href="./documentos/index.html" class="btn btn-primary">Documentos Constituintes</a>
+          <a href="./organizacao/index.html" class="btn btn-outline">Estrutura Organizacional</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMADAS -->
+  <section class="sec" style="border-top:1px solid var(--border2)">
+    <div class="container">
+      <div class="two-col sec-head">
+        <div><p class="side-label">Arquitetura</p></div>
+        <div>
+          <h2>As 4 Camadas do Ecossistema</h2>
+          <p>Conforme definido na Carta de Identidade Institucional e no Projeto-Mãe EU<sup class="plus">+</sup>.</p>
+        </div>
+      </div>
+      <div class="camadas-wrap">
+        <div class="camada reveal"><span class="camada-n">1</span><div class="camada-label">Camada</div><div class="camada-title">Inteligência</div><p class="camada-desc">Núcleo de processamento analítico. Onde o conhecimento é capturado, organizado e transformado em ativo institucional.</p></div>
+        <div class="camada reveal rd1"><span class="camada-n">2</span><div class="camada-label">Camada</div><div class="camada-title">Estruturação</div><p class="camada-desc">Onde ideias e problemas são transformados em frameworks, metodologias e processos aplicáveis e replicáveis.</p></div>
+        <div class="camada reveal rd2"><span class="camada-n">3</span><div class="camada-label">Camada</div><div class="camada-title">Patrimônio</div><p class="camada-desc">Custódia do conhecimento vivo. A Central do Conhecimento EU<sup class="plus">+</sup> é o repositório permanente do ecossistema.</p></div>
+        <div class="camada reveal rd3"><span class="camada-n">4</span><div class="camada-label">Camada</div><div class="camada-title">Aplicação</div><p class="camada-desc">Entrega prática nas frentes EU<sup class="plus">+</sup> VIDA, NEGÓCIO, EMPREENDER e MISSÃO.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NAVEGAÇÃO -->
+  <section class="sec">
+    <div class="container">
+      <div class="two-col sec-head">
+        <div><p class="side-label">Navegação</p></div>
+        <div>
+          <h2>O que você encontra aqui</h2>
+          <p>Cada área reflete uma dimensão real do ecossistema EU<sup class="plus">+</sup>.</p>
+        </div>
+      </div>
+      <div class="nav-cards">
+        <a href="./documentos/index.html" class="nav-card reveal">
+          <div class="nav-card-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="2" y="1" width="11" height="13" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 5h5M5 7.5h5M5 10h3" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
+          <div class="nav-card-label">Fundacional</div>
+          <h3>Institucional</h3>
+          <p>Constituição, Carta de Identidade, Governança, Plano de Negócios e Projeto-Mãe. Os documentos soberanos.</p>
+        </a>
+        <a href="./organizacao/index.html" class="nav-card reveal rd1">
+          <div class="nav-card-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="4" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="3" cy="11.5" r="2" stroke="currentColor" stroke-width="1.3"/><circle cx="12" cy="11.5" r="2" stroke="currentColor" stroke-width="1.3"/><path d="M7.5 6v2.5M7.5 8.5L3 10M7.5 8.5L12 10" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+          <div class="nav-card-label">Estrutura</div>
+          <h3>Organização</h3>
+          <p>Presidência, Board Estratégico, Diretorias, Gerências e Operação.</p>
+        </a>
+        <a href="./governanca/index.html" class="nav-card reveal rd2">
+          <div class="nav-card-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.3"/><path d="M7.5 5v2.5l2 2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <div class="nav-card-label">Normativo</div>
+          <h3>Governança</h3>
+          <p>Tomada de decisão, fluxos institucionais, responsabilidades e bases de conhecimento.</p>
+        </a>
+        <a href="./frameworks/index.html" class="nav-card reveal rd1">
+          <div class="nav-card-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="1.5" y="1.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8.5" y="1.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1.5" y="8.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="8.5" y="8.5" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.3"/></svg></div>
+          <div class="nav-card-label">Patrimônio Intelectual</div>
+          <h3>Frameworks</h3>
+          <p>Gestão Evolutiva™, Estoque Real™, Consultor EU<sup class="plus">+</sup>™ e Rotina Guiada™.</p>
+        </a>
+        <a href="./projetos/index.html" class="nav-card reveal rd2">
+          <div class="nav-card-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 12V5a1 1 0 011-1h7a1 1 0 011 1v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M1.5 12h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M6 8.5h3M6 6.5h2" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
+          <div class="nav-card-label">Iniciativas</div>
+          <h3>Projetos</h3>
+          <p>EU<sup class="plus">+</sup> Vida Profissional, Gestão de Food e demais iniciativas oficiais em andamento.</p>
+        </a>
+        <a href="./roadmap/index.html" class="nav-card reveal rd3">
+          <div class="nav-card-icon"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 12l3.5-7h4L13 12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 8.5h7" stroke="currentColor" stroke-width="1" stroke-linecap="round"/></svg></div>
+          <div class="nav-card-label">Evolução</div>
+          <h3>Roadmap</h3>
+          <p>O que foi concluído, o que está em desenvolvimento e o que está planejado para o ecossistema.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCÍPIO -->
+  <section class="sec">
+    <div class="container">
+      <div class="principle-box reveal">
+        <blockquote>"Agentes livres.<br>Conhecimento preservado."</blockquote>
+        <cite>Filosofia V2 · Grupo EU⁺</cite>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer id="site-footer"></footer>
+<script src="./js/shared.js"></script>
+<script>buildNav('inicio'); buildFooter();</script>
+</body>
+</html>
