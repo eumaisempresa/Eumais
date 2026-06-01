@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU⁺ · Projetos</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.proj-card{border:1px solid var(--border2);border-radius:3px;background:var(--bg2);overflow:hidden;transition:border-color 0.3s,transform 0.2s;margin-bottom:16px;}
+.proj-card:hover{border-color:rgba(196,151,74,0.28);transform:translateY(-2px);}
+.proj-header{padding:26px 26px 18px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:1px solid var(--border2);position:relative;}
+.proj-header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.proj-label{font-size:0.6rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+.proj-name{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--text);line-height:1.15;}
+.proj-body{padding:18px 26px 24px;display:flex;flex-direction:column;gap:14px;}
+.pf-label{font-size:0.62rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.pf-text{font-size:0.84rem;font-weight:300;color:var(--muted);line-height:1.65;}
+.pf-text strong{font-weight:500;color:var(--text);}
+.pf-steps{list-style:none;display:flex;flex-direction:column;gap:5px;margin-top:4px;}
+.pf-steps li{font-size:0.81rem;font-weight:300;color:var(--muted);padding-left:16px;position:relative;line-height:1.55;}
+.pf-steps li::before{content:'';position:absolute;left:0;top:9px;width:4px;height:1px;background:var(--gold);}
+</style>
+</head>
+<body>
+<nav class="topnav" id="topnav"></nav>
+<div class="page-wrap">
+  <div class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow reveal">Ecossistema Ativo</p>
+      <h1 class="reveal rd1">Projetos EU<sup class="plus">+</sup></h1>
+      <p class="reveal rd2">Iniciativas oficiais em andamento no ecossistema. Cada projeto responde ao Critério Supremo de Avaliação: fortalecer o propósito, o equilíbrio e a construção de ativos do Grupo.</p>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="container">
+      <div class="two-col sec-head"><div><p class="side-label">Em andamento</p></div><div><h2 class="reveal">Projetos Oficiais</h2><p class="reveal rd1">Iniciativas ativas com objetivo, status e próximos passos definidos.</p></div></div>
+
+      <div class="proj-card reveal">
+        <div class="proj-header"><div><div class="proj-label">Frente EU⁺ VIDA</div><div class="proj-name">EU<sup class="plus">+</sup> Vida Profissional</div></div><span class="status-badge ativo">Em desenvolvimento</span></div>
+        <div class="proj-body">
+          <div><div class="pf-label">Objetivo</div><div class="pf-text">Plataforma de leitura e desenvolvimento de maturidade executiva. Avalia onde o profissional está, o que o mercado exige e o que precisa ser construído. Sem maquiar. Sem inflar.</div></div>
+          <div><div class="pf-label">Descrição</div><div class="pf-text">Sistema de diagnóstico baseado em evidências comprovadas. Mede <strong>estruturação, recorrência, escalabilidade, governança e influência</strong>. PDI vivo que evolui conforme o profissional executa e registra evidências reais.</div></div>
+          <div><div class="pf-label">Próximos passos</div><ul class="pf-steps"><li>Abertura da lista de acesso antecipado</li><li>Integração com leitura de perfil LinkedIn</li><li>Desenvolvimento do motor de scoring por evidências</li><li>Módulo de decaimento de competências</li></ul></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal rd1">
+        <div class="proj-header"><div><div class="proj-label">Frente EU⁺ NEGÓCIO</div><div class="proj-name">Gestão de Food</div></div><span class="status-badge ativo">Em andamento</span></div>
+        <div class="proj-body">
+          <div><div class="pf-label">Objetivo</div><div class="pf-text">Diagnóstico e estruturação de operações no setor de food service. Redução de perdas, melhoria de giro e implantação de processos que tornam a operação autônoma do gestor.</div></div>
+          <div><div class="pf-label">Descrição</div><div class="pf-text">Aplicação prática dos frameworks <strong>Estoque Real™</strong> e <strong>Rotina Guiada de Operação™</strong> em estabelecimentos de alimentação.</div></div>
+          <div><div class="pf-label">Próximos passos</div><ul class="pf-steps"><li>Consolidação do modelo de diagnóstico inicial</li><li>Documentação das rotinas como framework replicável</li><li>Desenvolvimento de painel de indicadores simplificado</li></ul></div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal rd2">
+        <div class="proj-header"><div><div class="proj-label">Infraestrutura Institucional</div><div class="proj-name">Portal Institucional EU<sup class="plus">+</sup></div></div><span class="status-badge ativo">Em andamento</span></div>
+        <div class="proj-body">
+          <div><div class="pf-label">Objetivo</div><div class="pf-text">Plataforma permanente de preservação do patrimônio intelectual do Grupo EU<sup class="plus">+</sup>, com simplicidade operacional, rastreabilidade documental e capacidade de crescimento de longo prazo.</div></div>
+          <div><div class="pf-label">Próximos passos</div><ul class="pf-steps"><li>Publicação estável no GitHub Pages</li><li>Integração com Central do Conhecimento EU⁺</li><li>Adição do Mapa de Inteligências à área de Organização</li><li>Expansão das áreas de Frameworks e Laboratório</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="container">
+      <div class="two-col sec-head"><div><p class="side-label">Pipeline</p></div><div><h2 class="reveal">Projetos Planejados</h2><p class="reveal rd1">Iniciativas aprovadas para desenvolvimento futuro conforme capacidade e priorização estratégica.</p></div></div>
+      <div class="grid3">
+        <div class="card reveal" style="opacity:0.6"><div class="card-label">Planejado</div><h3>EU<sup class="plus">+</sup> Negócios</h3><p>Diagnóstico de liderança, gestão de sucessão e formação executiva em escala para empresas.</p><div style="margin-top:14px"><span class="status-badge dev">Planejado</span></div></div>
+        <div class="card reveal rd1" style="opacity:0.6"><div class="card-label">Planejado</div><h3>EU<sup class="plus">+</sup> Missão</h3><p>Plataforma de transbordo do propósito espiritual e social em ativos de legado permanente.</p><div style="margin-top:14px"><span class="status-badge dev">Planejado</span></div></div>
+        <div class="card reveal rd2" style="opacity:0.6"><div class="card-label">Planejado</div><h3>Biblioteca de Projetos EU<sup class="plus">+</sup></h3><p>Repositório público de todos os projetos com histórico, lições aprendidas e ativos gerados.</p><div style="margin-top:14px"><span class="status-badge dev">Planejado</span></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+<footer id="site-footer"></footer>
+<script src="../js/shared.js"></script>
+<script>buildNav('projetos'); buildFooter();</script>
+</body>
+</html>
