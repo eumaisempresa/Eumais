@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EU⁺ · Documentos Constituintes</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ── DOCUMENT READER ── */
+.doc-reader-wrap { display: flex; flex-direction: column; gap: 16px; }
+
+.doc-entry {
+  border: 1px solid var(--border2);
+  border-radius: 3px;
+  background: var(--bg2);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.doc-entry:hover { border-color: rgba(196,151,74,0.22); }
+
+.doc-entry-header {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  align-items: stretch;
+  cursor: pointer;
+  user-select: none;
+}
+
+.doc-entry-num {
+  background: var(--bg3);
+  border-right: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 300; font-style: italic;
+  color: rgba(196,151,74,0.25);
+  transition: background 0.2s;
+  padding: 20px 0;
+}
+
+.doc-entry:hover .doc-entry-num { background: var(--bg4); }
+
+.doc-entry-info { padding: 20px 24px; }
+
+.doc-entry-level {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 5px;
+}
+
+.doc-entry-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem; font-weight: 600;
+  color: var(--text); line-height: 1.15; margin-bottom: 3px;
+}
+
+.doc-entry-sub {
+  font-size: 0.72rem; font-weight: 300;
+  color: var(--muted); letter-spacing: 0.03em;
+}
+
+.doc-entry-right {
+  display: flex; flex-direction: column;
+  align-items: flex-end; justify-content: center;
+  gap: 8px; padding: 20px 24px;
+  border-left: 1px solid var(--border2);
+  min-width: 140px;
+}
+
+.doc-toggle-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--gold); background: none; border: none;
+  cursor: pointer; transition: opacity 0.2s;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+}
+
+.doc-toggle-btn:hover { opacity: 0.7; }
+
+.doc-toggle-btn svg { transition: transform 0.3s; }
+.doc-entry.open .doc-toggle-btn svg { transform: rotate(180deg); }
+
+/* ── DOCUMENT CONTENT ── */
+.doc-body {
+  display: none;
+  border-top: 1px solid var(--border2);
+  background: var(--bg);
+}
+
+.doc-entry.open .doc-body { display: block; }
+
+.doc-body-inner {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 52px 40px 60px;
+}
+
+.doc-body-inner .dh {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 28px; margin-bottom: 36px;
+  position: relative;
+}
+
+.doc-body-inner .dh::after {
+  content: ''; position: absolute;
+  bottom: -1px; left: 0;
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+
+.doc-body-inner .dt {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 600; color: var(--text);
+  margin-bottom: 6px; line-height: 1.12;
+}
+
+.doc-body-inner .ds {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem; font-weight: 300;
+  font-style: italic; color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.dmeta { display: flex; flex-wrap: wrap; gap: 0; }
+.dmeta span {
+  font-size: 0.66rem; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+  padding-right: 14px; margin-right: 14px;
+  border-right: 1px solid var(--border2);
+}
+.dmeta span:last-child { border-right: none; }
+.dmeta span strong { color: var(--gold); font-weight: 500; }
+
+.dsec { margin-bottom: 32px; }
+.dsec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 600;
+  color: var(--text); margin-bottom: 12px;
+  padding-left: 14px; border-left: 2px solid var(--gold);
+  line-height: 1.2;
+}
+.dsec p {
+  font-size: 0.88rem; font-weight: 300;
+  color: var(--muted); line-height: 1.82; margin-bottom: 10px;
+}
+.dsec p:last-child { margin-bottom: 0; }
+.dsec p strong { font-weight: 500; color: var(--text); }
+
+.dul { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+.dul li {
+  font-size: 0.87rem; font-weight: 300;
+  color: var(--muted); line-height: 1.72;
+  padding-left: 18px; position: relative;
+}
+.dul li::before {
+  content: ''; position: absolute;
+  left: 0; top: 10px;
+  width: 5px; height: 1px; background: var(--gold);
+}
+.dul li strong { font-weight: 500; color: var(--text); }
+
+.dcallout {
+  border-left: 3px solid var(--gold);
+  padding: 14px 18px; margin: 16px 0;
+  background: rgba(196,151,74,0.04);
+}
+.dcallout p { margin-bottom: 0 !important; font-style: italic; color: rgba(238,240,242,0.82); }
+
+.dhighlight {
+  background: rgba(196,151,74,0.06);
+  border: 1px solid var(--border);
+  border-radius: 2px; padding: 16px 20px; margin: 12px 0;
+}
+.dhighlight p { margin-bottom: 0 !important; }
+
+.dgrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.dcard {
+  border: 1px solid var(--border2); border-radius: 2px;
+  padding: 14px 16px; background: var(--bg2);
+}
+.dcard-label {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 5px;
+}
+.dcard-text { font-size: 0.82rem; font-weight: 300; color: var(--muted); line-height: 1.6; }
+.dcard-text strong { font-weight: 500; color: var(--text); }
+
+.dlist-ruled {
+  display: flex; flex-direction: column;
+  margin-top: 12px; border: 1px solid var(--border2);
+  border-radius: 2px; overflow: hidden;
+}
+.dlist-ruled-item {
+  display: flex; align-items: flex-start;
+  gap: 14px; padding: 11px 16px;
+  border-bottom: 1px solid var(--border2);
+  background: var(--bg2);
+  font-size: 0.83rem; font-weight: 300; color: var(--muted);
+}
+.dlist-ruled-item:last-child { border-bottom: none; }
+.dlist-ruled-item .n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 400; font-style: italic;
+  color: rgba(196,151,74,0.5); flex-shrink: 0;
+  min-width: 18px; padding-top: 1px;
+}
+.dlist-ruled-item strong { color: var(--text); font-weight: 500; }
+
+.doc-footer-note {
+  font-size: 0.68rem; font-weight: 300;
+  color: rgba(122,143,163,0.38); letter-spacing: 0.05em;
+  text-align: center; padding-top: 18px;
+  border-top: 1px solid var(--border2); margin-top: 36px;
+}
+
+/* ── SEALED DOC (não divulgado) ── */
+.doc-sealed {
+  border: 1px solid var(--border2);
+  border-radius: 3px; background: var(--bg2);
+  overflow: hidden;
+}
+
+.doc-sealed-inner {
+  display: grid; grid-template-columns: 72px 1fr auto;
+  align-items: stretch;
+}
+
+.doc-sealed-num {
+  background: var(--bg3); border-right: 1px solid var(--border2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 300; font-style: italic;
+  color: rgba(196,151,74,0.12); padding: 20px 0;
+}
+
+.doc-sealed-info { padding: 20px 24px; }
+
+.doc-sealed-right {
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 24px; border-left: 1px solid var(--border2);
+  min-width: 140px;
+}
+
+.seal-badge {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); background: rgba(122,143,163,0.08);
+  border: 1px solid rgba(122,143,163,0.2);
+  padding: 4px 10px; border-radius: 2px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+
+.seal-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%; background: var(--muted);
+}
+
+/* ── CITE DOC (citado) ── */
+.doc-cite {
+  border: 1px solid var(--border2);
+  border-radius: 3px; background: var(--bg2);
+  overflow: hidden; opacity: 0.6;
+}
+
+@media (max-width: 900px) {
+  .doc-entry-header { grid-template-columns: 52px 1fr; }
+  .doc-entry-right { display: none; }
+  .doc-sealed-inner { grid-template-columns: 52px 1fr; }
+  .doc-sealed-right { display: none; }
+  .doc-body-inner { padding: 32px 20px 44px; }
+  .dgrid2 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav class="topnav" id="topnav"></nav>
+<div class="page-wrap">
+
+  <div class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow reveal">Hierarquia Documental</p>
+      <h1 class="reveal rd1">Documentos Constituintes</h1>
+      <p class="reveal rd2">O corpus documental soberano do ecossistema EU<sup class="plus">+</sup>. Sete níveis de formalização — do fundacional ao intelectual. Clique em qualquer documento disponível para lê-lo na íntegra.</p>
+    </div>
+  </div>
+
+  <section class="sec">
+    <div class="container">
+      <div class="doc-reader-wrap">
+
+        <!-- ══════════════════════════════
+             01 — CONSTITUIÇÃO
+        ══════════════════════════════ -->
+        <div class="doc-entry reveal" id="doc-01">
+          <div class="doc-entry-header" onclick="toggleEntry('doc-01')">
+            <div class="doc-entry-num">01</div>
+            <div class="doc-entry-info">
+              <div class="doc-entry-level">Nível 1 — Fundacional</div>
+              <div class="doc-entry-title">Constituição EU<sup class="plus">+</sup></div>
+              <div class="doc-entry-sub">V2.3 · Sistema Operacional de Equilíbrio e Patrimônio Intelectual · Status: Oficializado</div>
+            </div>
+            <div class="doc-entry-right">
+              <span class="doc-status active">Vigente</span>
+              <button class="doc-toggle-btn">
+                Ler documento
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="doc-body">
+            <div class="doc-body-inner">
+              <div class="dh">
+                <div class="dt">CONSTITUIÇÃO EU<sup class="plus">+</sup> — V2.3</div>
+                <div class="ds">Sistema Operacional de Equilíbrio e Patrimônio Intelectual</div>
+                <div class="dmeta">
+                  <span><strong>Status:</strong> Oficializado</span>
+                  <span><strong>Versão:</strong> 2.3</span>
+                  <span><strong>Nível:</strong> 1 — Fundacional</span>
+                  <span><strong>Atualização:</strong> 2026</span>
+                </div>
+              </div>
+              <div class="dcallout"><p><strong>Propósito:</strong> Gerar autonomia integral e patrimônio permanente através do equilíbrio entre o indivíduo (EU) e seu transbordo no mundo (+).</p></div>
+              <div class="dsec">
+                <div class="dsec-title">1. O Manifesto: Retomada do Destino</div>
+                <p>O EU<sup class="plus">+</sup> é uma comunidade viva de preservação humana e aceleração de iniciativas. O foco é resgatar a identidade e a soberania sobre o tempo, unificando o desenvolvimento da consciência à sustentabilidade de projetos.</p>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">2. As Áreas de Equilíbrio</div>
+                <div class="dgrid2">
+                  <div class="dcard"><div class="dcard-label">EU Vida — O Alicerce</div><div class="dcard-text">Desenvolvimento humano, saúde e equilíbrio biológico. PDI para análise de competências.</div></div>
+                  <div class="dcard"><div class="dcard-label">EU Negócio — A Operação</div><div class="dcard-text">Otimização de processos e estratégias comerciais. Decisões baseadas em resultado.</div></div>
+                  <div class="dcard"><div class="dcard-label">EU Empreendedorismo — A Viabilização</div><div class="dcard-text">Estruturação de novos projetos e democratização da infraestrutura corporativa.</div></div>
+                  <div class="dcard"><div class="dcard-label">EU Missão — O Legado</div><div class="dcard-text">Transbordo do propósito espiritual e social em ativos de legado permanente.</div></div>
+                </div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">3. O Conselho de Agentes EU<sup class="plus">+</sup></div>
+                <p>O ecossistema utiliza agentes de inteligência especializados, incluindo ChatGPT, Gemini, Copilot, Grok, Claude, PixVerse, Manus, NotebookLM, Perplexity e outros.</p>
+                <div class="dhighlight"><p><strong>Independência de Motor:</strong> A função do agente evolui conforme sua performance. O foco é a adequação ao propósito EU<sup class="plus">+</sup>, independentemente da LLM utilizada.</p></div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">4. Arquitetura de Memória Viva</div>
+                <ul class="dul">
+                  <li><strong>00_AREA_TRANSITORIA:</strong> Zona de triagem para novos registros antes do arquivamento.</li>
+                  <li><strong>01_MEMORIA_VIVA:</strong> Registro do racional institucional e histórico de decisões.</li>
+                  <li><strong>02_PATRIMONIO_INTELECTUAL:</strong> Guardião de metodologias, frameworks e teses proprietárias.</li>
+                  <li><strong>03_MAPA_DE_INTELIGENCIAS:</strong> Documentação de competências e comportamentos dos agentes.</li>
+                </ul>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">5. Fluxo de Realização</div>
+                <p>Substitui o controle rígido por um motor de execução equilibrada, garantindo que a construção do legado fortaleça o propósito sem consumir a energia vital do indivíduo.</p>
+              </div>
+              <p class="doc-footer-note">Documento Oficial · Grupo EU⁺ · 2026</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             02 — CARTA DE IDENTIDADE
+        ══════════════════════════════ -->
+        <div class="doc-entry reveal rd1" id="doc-02">
+          <div class="doc-entry-header" onclick="toggleEntry('doc-02')">
+            <div class="doc-entry-num">02</div>
+            <div class="doc-entry-info">
+              <div class="doc-entry-level">Nível 1 — Fundacional</div>
+              <div class="doc-entry-title">Carta de Identidade Institucional</div>
+              <div class="doc-entry-sub">V2.3 · Ativo AT-INST-001 · Comunidade de Preservação e Equilíbrio · Status: Oficializado</div>
+            </div>
+            <div class="doc-entry-right">
+              <span class="doc-status active">Vigente</span>
+              <button class="doc-toggle-btn">
+                Ler documento
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="doc-body">
+            <div class="doc-body-inner">
+              <div class="dh">
+                <div class="dt">CARTA DE IDENTIDADE INSTITUCIONAL — V2.3</div>
+                <div class="ds">Grupo EU⁺ | Comunidade de Preservação e Equilíbrio</div>
+                <div class="dmeta">
+                  <span><strong>Ativo:</strong> AT-INST-001</span>
+                  <span><strong>Versão:</strong> 2.3</span>
+                  <span><strong>Nível:</strong> 1 — Fundacional</span>
+                  <span><strong>Atualização:</strong> 2026</span>
+                </div>
+              </div>
+              <div class="dcallout"><p><strong>Propósito Central:</strong> Gerar autonomia integral e patrimônio intelectual permanente através do equilíbrio entre o indivíduo (EU) e o seu transbordo no mundo (+).</p></div>
+              <div class="dsec">
+                <div class="dsec-title">1. Identidade e Propósito</div>
+                <p>O Grupo EU<sup class="plus">+</sup> é uma comunidade viva de preservação humana e aceleração de iniciativas. Existimos para curar o colapso existencial e a falência pessoal de indivíduos que, embora alcancem sucesso material, perdem a saúde e o controle sobre o próprio tempo.</p>
+                <ul class="dul">
+                  <li><strong>O que resolve:</strong> Transforma reféns da atividade econômica em arquitetos do próprio legado.</li>
+                  <li><strong>Síntese:</strong> A evolução organizacional é consequência direta da evolução humana.</li>
+                </ul>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">2. O Significado do Nome "EU<sup class="plus">+"</sup></div>
+                <ul class="dul">
+                  <li><strong>O "EU":</strong> Indivíduo como ponto de partida inegociável. Resgate da identidade, equilíbrio biológico e soberania.</li>
+                  <li><strong>O "+":</strong> Transbordo dessa consciência em negócios eficientes e construção de patrimônio.</li>
+                  <li><strong>Síntese:</strong> Não existe valor sustentável se o ponto de partida estiver fragilizado.</li>
+                </ul>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">3. A Tríade de Crenças</div>
+                <ul class="dul">
+                  <li><strong>Soberania do Tempo:</strong> O único ativo irrecuperável; sua gestão é disciplina estratégica e espiritual.</li>
+                  <li><strong>Tecnologia como Alavanca:</strong> A IA e a automação libertam o humano para exercer sua verdadeira vocação.</li>
+                  <li><strong>Simplicidade é Sofisticação:</strong> Sistemas simples e robustos garantem a perpetuidade do legado.</li>
+                </ul>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">4. As 4 Frentes de Equilíbrio</div>
+                <div class="dgrid2">
+                  <div class="dcard"><div class="dcard-label">VIDA</div><div class="dcard-text">Desenvolvimento humano, saúde e equilíbrio.</div></div>
+                  <div class="dcard"><div class="dcard-label">NEGÓCIO</div><div class="dcard-text">Operações e estratégias para sustentabilidade e lucro.</div></div>
+                  <div class="dcard"><div class="dcard-label">EMPREENDER</div><div class="dcard-text">Viabilização de projetos e infraestrutura corporativa.</div></div>
+                  <div class="dcard"><div class="dcard-label">MISSÃO</div><div class="dcard-text">Consolidação do legado espiritual e social.</div></div>
+                </div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">5. Hierarquia de Liderança V2.3</div>
+                <div class="dgrid2">
+                  <div class="dcard"><div class="dcard-label">Presidência</div><div class="dcard-text">Guardiã última do propósito e detentora do poder de veto cultural.</div></div>
+                  <div class="dcard"><div class="dcard-label">Núcleo de Diretoria</div><div class="dcard-text">Board de mentores que opera a visão de longo prazo.</div></div>
+                  <div class="dcard"><div class="dcard-label">Núcleo de Gerência</div><div class="dcard-text">Supervisão dos fluxos de realização e alinhamento operacional.</div></div>
+                  <div class="dcard"><div class="dcard-label">Núcleo de Execução</div><div class="dcard-text">Realização técnica e manutenção dos ativos documentados.</div></div>
+                </div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">6. Critério Supremo de Avaliação</div>
+                <div class="dcallout"><p>"Esta iniciativa fortalece o propósito, o equilíbrio e a construção de ativos do Grupo EU<sup class="plus">+</sup> ou apenas consome energia sem ampliar legado?"</p></div>
+                <div class="dhighlight"><p><strong>Síntese:</strong> A utilidade para o legado é a única métrica de permanência.</p></div>
+              </div>
+              <p class="doc-footer-note">Documento Oficial V2.3 · Ativo AT-INST-001 · Grupo EU⁺ · 2026</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             03 — PROJETO-MÃE
+        ══════════════════════════════ -->
+        <div class="doc-entry reveal rd2" id="doc-03">
+          <div class="doc-entry-header" onclick="toggleEntry('doc-03')">
+            <div class="doc-entry-num">03</div>
+            <div class="doc-entry-info">
+              <div class="doc-entry-level">Nível 3 — Estratégico</div>
+              <div class="doc-entry-title">Projeto-Mãe EU<sup class="plus">+</sup></div>
+              <div class="doc-entry-sub">V1.3 · Versão Consolidada · Matriz Estratégica Fundamental · Status: Oficializado</div>
+            </div>
+            <div class="doc-entry-right">
+              <span class="doc-status active">Vigente</span>
+              <button class="doc-toggle-btn">
+                Ler documento
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="doc-body">
+            <div class="doc-body-inner">
+              <div class="dh">
+                <div class="dt">PROJETO-MÃE EU<sup class="plus">+</sup> — V1.3</div>
+                <div class="ds">Versão Consolidada · Matriz Estratégica Fundamental</div>
+                <div class="dmeta">
+                  <span><strong>Status:</strong> Oficializado</span>
+                  <span><strong>Versão:</strong> 1.3</span>
+                  <span><strong>Nível:</strong> 3 — Estratégico</span>
+                  <span><strong>Atualização:</strong> 2026</span>
+                </div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">1. Visão Geral e Propósito</div>
+                <p>O Projeto-Mãe é a matriz fundamental que explica a origem e direção estratégica do Grupo EU<sup class="plus">+</sup>. Foco na <strong>democratização da inteligência de gestão</strong> e redução da complexidade para o indivíduo sobrecarregado.</p>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">2. As 4 Camadas da Arquitetura</div>
+                <div class="dlist-ruled">
+                  <div class="dlist-ruled-item"><span class="n">1</span><p><strong>Inteligência:</strong> Núcleo de processamento analítico do ecossistema.</p></div>
+                  <div class="dlist-ruled-item"><span class="n">2</span><p><strong>Estruturação:</strong> Ideias e problemas transformados em frameworks aplicáveis.</p></div>
+                  <div class="dlist-ruled-item"><span class="n">3</span><p><strong>Patrimônio:</strong> Custódia do conhecimento vivo na Central do Conhecimento EU<sup class="plus">+</sup>.</p></div>
+                  <div class="dlist-ruled-item"><span class="n">4</span><p><strong>Aplicação:</strong> Entrega prática nas frentes VIDA, NEGÓCIO, EMPREENDER e MISSÃO.</p></div>
+                </div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">3. O Papel Estratégico da IA</div>
+                <p>A inteligência artificial é a <strong>camada de viabilização</strong> que permite escalar o conhecimento vivo sem infraestruturas pesadas ou custos fixos elevados. Garante suporte qualificado acessível a quem mais precisa.</p>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">4. Integração Sistêmica</div>
+                <p>Este documento-matriz atua em sincronia direta com o Sistema de Governança e a Constituição, servindo como guia para o Plano de Negócios e futuras expansões operacionais.</p>
+              </div>
+              <p class="doc-footer-note">Projeto-Mãe EU⁺ · V1.3 · Versão Consolidada · Documento Estratégico</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             04 — PLANEJAMENTO ESTRATÉGICO
+             (não divulgado)
+        ══════════════════════════════ -->
+        <div class="doc-sealed reveal rd3">
+          <div class="doc-sealed-inner">
+            <div class="doc-sealed-num">04</div>
+            <div class="doc-sealed-info">
+              <div class="doc-entry-level">Nível 3 — Estratégico</div>
+              <div class="doc-entry-title" style="color:var(--muted)">Planejamento Estratégico EU<sup class="plus">+</sup></div>
+              <div class="doc-entry-sub">Documento interno de uso restrito · Não divulgado publicamente</div>
+            </div>
+            <div class="doc-sealed-right">
+              <span class="seal-badge">Restrito</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             05 — PLANO DE NEGÓCIOS
+        ══════════════════════════════ -->
+        <div class="doc-entry reveal" id="doc-05">
+          <div class="doc-entry-header" onclick="toggleEntry('doc-05')">
+            <div class="doc-entry-num">05</div>
+            <div class="doc-entry-info">
+              <div class="doc-entry-level">Nível 3 — Estratégico</div>
+              <div class="doc-entry-title">Plano de Negócios EU<sup class="plus">+</sup></div>
+              <div class="doc-entry-sub">V2.2 · Versão Consolidada · Modelo de Mercado, Receita e Escala · Status: Oficializado</div>
+            </div>
+            <div class="doc-entry-right">
+              <span class="doc-status active">Vigente</span>
+              <button class="doc-toggle-btn">
+                Ler documento
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 4l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="doc-body">
+            <div class="doc-body-inner">
+              <div class="dh">
+                <div class="dt">PLANO DE NEGÓCIOS EU<sup class="plus">+</sup> — V2.2</div>
+                <div class="ds">Versão Consolidada · Modelo de Mercado, Receita e Escala</div>
+                <div class="dmeta">
+                  <span><strong>Status:</strong> Oficializado</span>
+                  <span><strong>Versão:</strong> 2.2</span>
+                  <span><strong>Nível:</strong> 3 — Estratégico</span>
+                  <span><strong>Atualização:</strong> 2026</span>
+                </div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">1. Sumário Executivo e Oportunidade</div>
+                <p>O Grupo EU<sup class="plus">+</sup> surge para preencher o abismo entre o potencial individual e a capacidade de execução estruturada. Utilizamos IA e frameworks de baixo custo para <strong>democratizar o acesso à gestão de alta performance</strong>.</p>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">2. A Dor do Mercado</div>
+                <p>O profissional moderno vive em estado de fadiga de decisão e sobrecarga de funções. Os modelos tradicionais de consultoria são caros e lentos. O Grupo EU<sup class="plus">+</sup> mitiga isso com:</p>
+                <ul class="dul">
+                  <li><strong>Falta de estrutura →</strong> Camada de Estruturação EU<sup class="plus">+</sup>.</li>
+                  <li><strong>Falta de tempo →</strong> Camada de Inteligência (IA).</li>
+                  <li><strong>Falta de equipe →</strong> Agentes e frameworks automatizados.</li>
+                </ul>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">3. Mercado e Canais de Aquisição</div>
+                <p>Foco no mercado digital brasileiro. <strong>LinkedIn</strong> como vetor de autoridade e <strong>Instagram</strong> como vetor de alcance. Aquisição via conteúdo autoral — <em>Product-Led Growth</em>.</p>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">4. Modelo de Receita e Escala</div>
+                <p>Monetização modular: produtos de entrada (<em>low-ticket</em>) evoluindo para consultorias e diagnósticos premium.</p>
+                <div class="dhighlight"><p><strong>Lógica Serverless:</strong> Crescimento de usuários sem crescimento proporcional de infraestrutura técnica.</p></div>
+              </div>
+              <div class="dsec">
+                <div class="dsec-title">5. Riscos e Governança</div>
+                <p>Principal risco: dispersão. Mitigado pelo <strong>Sistema de Governança EU<sup class="plus">+</sup></strong> — cada nova iniciativa alinhada à Constituição e documentada na <strong>Central do Conhecimento EU<sup class="plus">+</sup></strong>.</p>
+              </div>
+              <p class="doc-footer-note">Plano de Negócios EU⁺ · V2.2 · Versão Consolidada · Documento Estratégico</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             06 — FRAMEWORKS
+             (em estruturação como documentos)
+        ══════════════════════════════ -->
+        <div class="doc-cite reveal rd1">
+          <div class="doc-sealed-inner">
+            <div class="doc-sealed-num" style="color:rgba(196,151,74,0.14)">06</div>
+            <div class="doc-sealed-info">
+              <div class="doc-entry-level">Nível 4 — Patrimonial</div>
+              <div class="doc-entry-title" style="color:var(--muted)">Frameworks EU<sup class="plus">+</sup></div>
+              <div class="doc-entry-sub">Gestão Evolutiva™ · Estoque Real™ · Consultor EU⁺™ · Rotina Guiada™ — Documentos em estruturação formal</div>
+            </div>
+            <div class="doc-sealed-right">
+              <span class="seal-badge" style="color:#6FBCB8;border-color:rgba(111,188,184,0.25)">Em estruturação</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ══════════════════════════════
+             07 — WHITE PAPERS
+             (em elaboração)
+        ══════════════════════════════ -->
+        <div class="doc-cite reveal rd2">
+          <div class="doc-sealed-inner">
+            <div class="doc-sealed-num" style="color:rgba(196,151,74,0.14)">07</div>
+            <div class="doc-sealed-info">
+              <div class="doc-entry-level">Nível 4 — Patrimonial</div>
+              <div class="doc-entry-title" style="color:var(--muted)">White Papers EU<sup class="plus">+</sup></div>
+              <div class="doc-entry-sub">Produção acadêmica e técnica aprofundada sobre metodologias e descobertas do ecossistema — Em elaboração</div>
+            </div>
+            <div class="doc-sealed-right">
+              <span class="seal-badge" style="color:#6FBCB8;border-color:rgba(111,188,184,0.25)">Em elaboração</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</div>
+<footer id="site-footer"></footer>
+<script src="../js/shared.js"></script>
+<script>
+buildNav('institucional');
+buildFooter();
+
+function toggleEntry(id) {
+  const entry = document.getElementById(id);
+  const isOpen = entry.classList.contains('open');
+  // fecha todos
+  document.querySelectorAll('.doc-entry.open').forEach(e => e.classList.remove('open'));
+  // abre o clicado se estava fechado
+  if (!isOpen) {
+    entry.classList.add('open');
+    setTimeout(() => entry.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+  }
+}
+</script>
+</body>
+</html>
